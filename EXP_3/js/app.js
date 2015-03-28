@@ -4,7 +4,8 @@
         var gem = {
             name: 'Some Gem',
             price: 10,
-            description: 'sjgfskjgfsjdgfsjdgfskj'
+            description: 'sjgfskjgfsjdgfsjdgfskj',
+            canPurchase: true
         };
 
 

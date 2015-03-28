@@ -13,7 +13,8 @@
     <div ng-controller="StoreController as store">
         <h1>{{store.product.name}}</h1>
         <h2>Price: {{store.product.price}}</h2>
-        <h3>{{store.product.description}}</h3>
+        <p>{{store.product.description}}</p>
+        <button ng-show="store.product.canPurchase"> Purchase </button>
     </div>
 
 
