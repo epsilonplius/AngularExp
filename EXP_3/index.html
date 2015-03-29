@@ -12,14 +12,20 @@
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 
-    <div ng-controller="StoreController as store">
-        <div ng-hide="store.product.soldOut">
-            <h1>{{store.product.name}}</h1>
-            <h2>Price: {{store.product.price}}</h2>
-            <p>{{store.product.description}}</p>
-            <button ng-show="store.product.canPurchase"> Purchase </button>
+    <div class="container">
+        <div ng-controller="StoreController as store">
+            <div ng-repeat="product in store.products" class="list-group">
+                <div ng-hide="product.soldOut" class="list-group-item">
+                    <h2>{{product.name}}</h2>
+                    <h3>Price: {{product.price}}</h3>
+                    <p>{{product.description}}</p>
+                    <button ng-show="product.canPurchase"> Purchase </button>
+                </div>
+            </div>
         </div>
     </div>
+
+
 </body>
 
 </html>
