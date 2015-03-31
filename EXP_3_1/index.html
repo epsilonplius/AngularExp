@@ -5,7 +5,15 @@
     <meta charset="UTF-8">
     <title>Angular exp_1</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <style>
+        .ng-valid.ng-dirty {
+            border-color: green;
+        }
 
+        .ng-invalid.ng-dirty {
+            border-color: red;
+        }
+    </style>
 </head>
 
 <body ng-controller="StoreController as store">
@@ -46,7 +54,7 @@
                             <hr>
 
                             <div>
-                                <form name="Review" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+                                <form name="Review" ng-controller="ReviewController as reviewCtrl" ng-submit="Review.$valid && reviewCtrl.addReview(product)" novalidate>
                                     <blockquote>
                                         <b>Stars: {{reviewCtrl.review.stars}}</b>
                                         <br> {{reviewCtrl.review.body}}
@@ -54,16 +62,16 @@
                                         <cite>Author: {{reviewCtrl.review.author}}</cite>
                                     </blockquote>
                                     <label for="stars">Stars</label>
-                                    <select id="stars" ng-model="reviewCtrl.review.stars" class="form-control input-sm">
+                                    <select id="stars" ng-model="reviewCtrl.review.stars" class="form-control input-sm" required>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
                                     </select>
                                     <label for="body">Review</label>
-                                    <textarea id="body" ng-model="reviewCtrl.review.body" class="form-control input-sm"></textarea>
+                                    <textarea id="body" ng-model="reviewCtrl.review.body" class="form-control input-sm" required></textarea>
                                     <label for="author">Author</label>
-                                    <input id="author" type="email" ng-model="reviewCtrl.review.author" class="form-control input-sm" />
+                                    <input id="author" type="email" ng-model="reviewCtrl.review.author" class="form-control input-sm" required/>
                                     <input type="submit" value="Post" />
                                 </form>
                             </div>
