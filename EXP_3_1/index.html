@@ -14,27 +14,70 @@
 
     <div class="container">
 
-        <div class="panel panel-dafault">
-            <div class="panel-body">
-                <form name="Review">
-                    <blockquote>
-                        <b>Stars: {{review.stars}}</b>
-                        <br> {{review.body}}
-                        <br>
-                        <cite>Author: {{review.author}}</cite>
-                    </blockquote>
-                    <select ng-model="review.stars" class="form-control input-sm">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                    <textarea ng-model="review.body" class="form-control input-sm"></textarea>
-                    <input type="email" ng-model="review.author" class="form-control input-sm" />
-                </form>
-            </div>
+        <div class="list-group">
+            <div ng-repeat="product in store.products" class="list-group-item">
+                <div ng-hide="product.soldOut">
 
+                    <div class="panel" ng-controller="PanelController as panel">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" ng-class="{active:panel.tab===1}"><a href="#" ng-click="panel.tab=1">Description</a>
+                            </li>
+                            <li role="presentation" ng-class="{active:panel.tab===2}"><a href="#" ng-click="panel.tab=2">Reviews</a>
+                            </li>
+                        </ul>
+
+
+                        <div class="panel" ng-show="panel.tab===1">
+                            <h2>{{product.name}}</h2>
+                            <h3>Price: {{product.price | currency}}</h3>
+                            <p>{{product.description}}</p>
+                            <p>{{product.publishDate | date: 'yyyy-MM-dd'}}</p>
+                            <button ng-show="product.canPurchase"> Purchase </button>
+                        </div>
+                        <div class="panel list-group" ng-show="panel.tab===2">
+                            <li ng-repeat="review in product.reviews">
+                                <blockquote>
+                                    <b>Stars: {{review.stars}}</b>
+                                    <br> {{review.body}}
+                                    <br>
+                                    <cite>Author: {{review.author}}</cite>
+                                </blockquote>
+                            </li>
+                            <hr>
+
+                            <div>
+                                <form name="Review" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewCtrl.addReview(product)">
+                                    <blockquote>
+                                        <b>Stars: {{reviewCtrl.review.stars}}</b>
+                                        <br> {{reviewCtrl.review.body}}
+                                        <br>
+                                        <cite>Author: {{reviewCtrl.review.author}}</cite>
+                                    </blockquote>
+                                    <label for="stars">Stars</label>
+                                    <select id="stars" ng-model="reviewCtrl.review.stars" class="form-control input-sm">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                    <label for="body">Review</label>
+                                    <textarea id="body" ng-model="reviewCtrl.review.body" class="form-control input-sm"></textarea>
+                                    <label for="author">Author</label>
+                                    <input id="author" type="email" ng-model="reviewCtrl.review.author" class="form-control input-sm" />
+                                    <input type="submit" value="Post" />
+                                </form>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+
 
     </div>
 </body>
